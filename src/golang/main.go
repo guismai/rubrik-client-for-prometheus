@@ -121,6 +121,14 @@ func main() {
 		}
 	}()
 
+	// Mv capacity stats
+	go func() {
+		for {
+			stats.GetMvCapacityStats(rubrik, clusterName.(string))
+			time.Sleep(time.Duration(1) * time.Hour)
+		}
+	}()
+	
 	// Rubrik Snappable slaDomain
 	go func() {
 		for {
