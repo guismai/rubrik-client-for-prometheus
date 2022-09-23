@@ -105,7 +105,7 @@ func GetWindowsVolumeGroupsCapacityStats(rubrik *rubrikcdm.Credentials, clusterN
 				"limit":  1000,
 				"cursor": cursor,
 				"requestFilters": map[string]interface{}{
-					"objectType": "ShareFileset",
+					"objectType": "WindowsVolumeGroup",
 				},
 			}
 		}
