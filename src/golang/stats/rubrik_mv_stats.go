@@ -38,8 +38,8 @@ var (
 
 func init() {
 	// MV storage stats
-	prometheus.MustRegister(rubrikNasCapacityLocalUsed)
-	prometheus.MustRegister(rubrikNasCapacityArchiveUsed)
+	prometheus.MustRegister(rubrikMvCapacityLocalUsed)
+	prometheus.MustRegister(rubrikMvCapacityArchiveUsed)
 }
 
 // GetMvCapacityStats ...
