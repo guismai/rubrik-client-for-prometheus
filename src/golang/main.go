@@ -17,12 +17,13 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/rubrikinc/rubrik-client-for-prometheus/src/golang/jobs"
-	"github.com/rubrikinc/rubrik-client-for-prometheus/src/golang/livemount"
-	"github.com/rubrikinc/rubrik-client-for-prometheus/src/golang/objectprotection"
-	"github.com/rubrikinc/rubrik-client-for-prometheus/src/golang/stats"
+	"github.com/guismai/rubrik-client-for-prometheus/src/golang/jobs"
+	"github.com/guismai/rubrik-client-for-prometheus/src/golang/livemount"
+	"github.com/guismai/rubrik-client-for-prometheus/src/golang/objectprotection"
+	"github.com/guismai/rubrik-client-for-prometheus/src/golang/stats"
 	"github.com/rubrikinc/rubrik-sdk-for-go/rubrikcdm"
 )
+
 
 func main() {
 	// set our Prometheus variables
@@ -108,6 +109,14 @@ func main() {
 	go func() {
 		for {
 			stats.GetVSphereVmCapacityStats(rubrik, clusterName.(string))
+			time.Sleep(time.Duration(1) * time.Hour)
+		}
+	}()
+
+	// Nas capacity stats
+	go func() {
+		for {
+			stats.GetNasCapacityStats(rubrik, clusterName.(string))
 			time.Sleep(time.Duration(1) * time.Hour)
 		}
 	}()
