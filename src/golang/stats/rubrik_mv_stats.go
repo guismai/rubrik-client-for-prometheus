@@ -105,7 +105,7 @@ func GetMvCapacityStats(rubrik *rubrikcdm.Credentials, clusterName string) {
 				"limit":  1000,
 				"cursor": cursor,
 				"requestFilters": map[string]interface{}{
-					"objectType": "ShareFileset",
+					"objectType": "ManagedVolume",
 				},
 			}
 		}
