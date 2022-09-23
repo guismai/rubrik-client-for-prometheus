@@ -24,7 +24,7 @@ var (
 	)
 	rubrikNasCapacityArchiveUsed = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name: "rubrik_nas_vm_capacity_archive_used_bytes",
+			Name: "rubrik_nas_capacity_archive_used_bytes",
 			Help: "Archive storage consumption for NAS snapshots.",
 		},
 		[]string{
