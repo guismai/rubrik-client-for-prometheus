@@ -113,6 +113,30 @@ func main() {
 		}
 	}()
 
+	// Windows Volume Groups capacity stats
+	go func() {
+		for {
+			stats.GetWindowsVolumeGroupsCapacityStats(rubrik, clusterName.(string))
+			time.Sleep(time.Duration(1) * time.Hour)
+		}
+	}()
+
+	// Windows Fileset capacity stats
+	go func() {
+		for {
+			stats.GetWindowsFilesetCapacityStats(rubrik, clusterName.(string))
+			time.Sleep(time.Duration(1) * time.Hour)
+		}
+	}()
+
+	// LinuxFileset  capacity stats
+	go func() {
+		for {
+			stats.GetLinuxFilesetCapacityStats(rubrik, clusterName.(string))
+			time.Sleep(time.Duration(1) * time.Hour)
+		}
+	}()
+	
 	// Nas capacity stats
 	go func() {
 		for {
