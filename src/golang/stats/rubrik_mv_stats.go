@@ -42,8 +42,8 @@ func init() {
 	prometheus.MustRegister(rubrikNasCapacityArchiveUsed)
 }
 
-// GetMVCapacityStats ...
-func GetMVCapacityStats(rubrik *rubrikcdm.Credentials, clusterName string) {
+// GetMvCapacityStats ...
+func GetMvCapacityStats(rubrik *rubrikcdm.Credentials, clusterName string) {
 	reportData, err := rubrik.Get("internal", "/report?report_template=ObjectProtectionSummary&report_type=Canned", 60) // get our object protection summary report
 	if err != nil {
 		log.Printf("Error from stats.GetNasCapacityStats: ", err)
