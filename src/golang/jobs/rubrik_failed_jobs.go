@@ -157,6 +157,9 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 						hasFailedEvent = true
 					}
 				}
+
+				log.Printf(eventSeriesData.(map[string]interface{})["objectId"])
+				
 				if hasFailedEvent == true {
 					thisObjectName := eventSeriesData.(map[string]interface{})["objectName"]
 					thisObjectID := eventSeriesData.(map[string]interface{})["objectId"]
