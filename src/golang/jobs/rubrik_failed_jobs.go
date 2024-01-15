@@ -136,8 +136,10 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 			}
 		}
 	} else { // cluster version is 5.2 or newer
-		var yesterday = time.Now().AddDate(0, 0, -1).Format("2006-01-02T15:04:05.000Z")
-		eventData, err := rubrik.Get("v1", "/event/latest?limit=9999&event_status=Failure&event_type=Backup&object_type=Mssql&before_date="+yesterday, 60)
+		// var yesterday = time.Now().AddDate(0, 0, -1).Format("2006-01-02T15:04:05.000Z")
+		// eventData, err := rubrik.Get("v1", "/event/latest?limit=9999&event_status=Failure&event_type=Backup&object_type=Mssql&before_date="+yesterday, 60)
+		eventData, err := rubrik.Get("v1", "/event/latest?limit=9999&event_status=Failure&event_type=Backup&object_type=Mssql&before_date=2024-01-14T08:08:40.567Z", 60)
+
 		if err != nil {
 			log.Printf("Error from jobs.GetMssqlFailedJobs: ", err)
 			return
