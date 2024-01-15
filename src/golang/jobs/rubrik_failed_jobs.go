@@ -172,6 +172,7 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisStartTime = eventSeriesData.(map[string]interface{})["startTime"].(string)
 					}
+					log.Printf("thisStartTime")
 					log.Printf(thisStartTime)
 					var thisEndTime string
 					if eventSeriesData.(map[string]interface{})["endTime"] == nil {
@@ -179,6 +180,7 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisEndTime = eventSeriesData.(map[string]interface{})["endTime"].(string)
 					}
+					log.Printf("thisEndTime")
 					log.Printf(thisEndTime)
 					var thisLogicalSize string
 					if eventSeriesData.(map[string]interface{})["logicalSize"] == nil {
@@ -186,6 +188,7 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisLogicalSize = strconv.FormatFloat(eventSeriesData.(map[string]interface{})["logicalSize"].(float64), 'f', -1, 64)
 					}
+					log.Printf("thisLogicalSize")
 					log.Printf(thisLogicalSize)
 					var thisDuration string
 					if eventSeriesData.(map[string]interface{})["duration"] == nil {
@@ -193,6 +196,7 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisDuration = eventSeriesData.(map[string]interface{})["duration"].(string)
 					}
+					log.Printf("thisDuration")
 					log.Printf(thisDuration)
 					thisEventDate := eventSeriesData.(map[string]interface{})["startTime"]
 					log.Printf(thisEventDate.(string))
