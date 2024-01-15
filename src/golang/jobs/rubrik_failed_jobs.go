@@ -56,6 +56,7 @@ func init() {
 
 // GetMssqlFailedJobs ...
 func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
+	log.Printf("GetMssqlFailedJobs")
 	clusterVersion, err := rubrik.ClusterVersion()
 	if err != nil {
 		log.Printf("Error from jobs.GetMssqlFailedJobs: ", err)
