@@ -121,7 +121,7 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisDuration = v.(map[string]interface{})["duration"].(string)
 					}
-					thisEventDate := v.(map[string]interface{})["eventDate"]
+					
 					rubrikMssqlFailedJob.WithLabelValues(
 						clusterName,
 						thisObjectName.(string),
@@ -131,15 +131,14 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 						thisEndTime,
 						thisLogicalSize,
 						thisDuration,
-						thisEventDate.(string)).Set(1)
+						thisStartTime).Set(1)
 				}
 			}
 		}
 	} else { // cluster version is 5.2 or newer
-		// var yesterday = time.Now().AddDate(0, 0, -1).Format("2006-01-02T15:04:05.000Z")
-		// eventData, err := rubrik.Get("v1", "/event/latest?limit=9999&event_status=Failure&event_type=Backup&object_type=Mssql&before_date="+yesterday, 60)
-		eventData, err := rubrik.Get("v1", "/event/latest?limit=9999&event_status=Failure&event_type=Backup&object_type=Mssql&before_date=2024-01-14T08:08:40.567Z", 60)
-
+		var yesterday = time.Now().AddDate(0, 0, -1).Format("2006-01-02T15:04:05.000Z")
+		eventData, err := rubrik.Get("v1", "/event/latest?limit=9999&event_status=Failure&event_type=Backup&object_type=Mssql&before_date="+yesterday, 60)
+		
 		if err != nil {
 			log.Printf("Error from jobs.GetMssqlFailedJobs: ", err)
 			return
@@ -172,39 +171,28 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisStartTime = eventSeriesData.(map[string]interface{})["startTime"].(string)
 					}
-					log.Printf("thisStartTime")
-					log.Printf(thisStartTime)
+
 					var thisEndTime string
 					if eventSeriesData.(map[string]interface{})["endTime"] == nil {
 						thisEndTime = "null"
 					} else {
 						thisEndTime = eventSeriesData.(map[string]interface{})["endTime"].(string)
 					}
-					log.Printf("thisEndTime")
-					log.Printf(thisEndTime)
+
 					var thisLogicalSize string
 					if eventSeriesData.(map[string]interface{})["logicalSize"] == nil {
 						thisLogicalSize = "null"
 					} else {
 						thisLogicalSize = strconv.FormatFloat(eventSeriesData.(map[string]interface{})["logicalSize"].(float64), 'f', -1, 64)
 					}
-					log.Printf("thisLogicalSize")
-					log.Printf(thisLogicalSize)
+
 					var thisDuration string
 					if eventSeriesData.(map[string]interface{})["duration"] == nil {
 						thisDuration = "null"
 					} else {
 						thisDuration = eventSeriesData.(map[string]interface{})["duration"].(string)
 					}
-					log.Printf("thisDuration")
-					log.Printf(thisDuration)
-					
-					//thisEventDate := eventSeriesData.(map[string]interface{})["startTime"]
-					
-					//log.Printf("thisEventDate")
-					//log.Printf(thisEventDate.(string))
 
-					log.Printf("B rubrikMssqlFailedJob.WithLabelValues")
 					rubrikMssqlFailedJob.WithLabelValues(
 						clusterName,
 						thisObjectName.(string),
@@ -215,8 +203,6 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 						thisLogicalSize,
 						thisDuration,
 						thisStartTime).Set(1)
-
-					log.Printf("E rubrikMssqlFailedJob.WithLabelValues")
 				}
 			}
 		}
@@ -288,7 +274,7 @@ func GetVmwareVmFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisDuration = v.(map[string]interface{})["duration"].(string)
 					}
-					thisEventDate := v.(map[string]interface{})["eventDate"]
+		
 					rubrikVmwareVmFailedJob.WithLabelValues(
 						clusterName,
 						thisObjectName.(string),
@@ -298,7 +284,7 @@ func GetVmwareVmFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 						thisEndTime,
 						thisLogicalSize,
 						thisDuration,
-						thisEventDate.(string)).Set(1)
+						thisStartTime).Set(1)
 				}
 			}
 		}
@@ -352,7 +338,7 @@ func GetVmwareVmFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					} else {
 						thisDuration = eventSeriesData.(map[string]interface{})["duration"].(string)
 					}
-					thisEventDate := eventSeriesData.(map[string]interface{})["startTime"]
+		
 					rubrikVmwareVmFailedJob.WithLabelValues(
 							clusterName,
 							thisObjectName.(string),
@@ -362,7 +348,7 @@ func GetVmwareVmFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 							thisEndTime,
 							thisLogicalSize,
 							thisDuration,
-							thisEventDate.(string)).Set(1)
+							thisStartTime).Set(1)
 				}
 			}
 		}
