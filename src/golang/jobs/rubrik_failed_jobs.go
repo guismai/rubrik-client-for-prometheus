@@ -199,9 +199,10 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 					log.Printf("thisDuration")
 					log.Printf(thisDuration)
 					
-					thisEventDate := eventSeriesData.(map[string]interface{})["startTime"]
-					log.Printf("thisEventDate")
-					log.Printf(thisEventDate.(string))
+					//thisEventDate := eventSeriesData.(map[string]interface{})["startTime"]
+					
+					//log.Printf("thisEventDate")
+					//log.Printf(thisEventDate.(string))
 
 					log.Printf("B rubrikMssqlFailedJob.WithLabelValues")
 					rubrikMssqlFailedJob.WithLabelValues(
@@ -213,7 +214,7 @@ func GetMssqlFailedJobs(rubrik *rubrikcdm.Credentials, clusterName string) {
 						thisEndTime,
 						thisLogicalSize,
 						thisDuration,
-						thisEventDate.(string)).Set(1)
+						thisStartTime).Set(1)
 
 					log.Printf("E rubrikMssqlFailedJob.WithLabelValues")
 				}
